@@ -1,11 +1,12 @@
 (ns looping-is-recursion)
 
 (defn power [base exp]
-  (let [p (fn [res n k]
-            (if (<= k 0)
-              res
-              (recur (* res n) n (dec k))))]
-    (p 1 base exp)))
+  (loop [res 1
+         n base
+         k exp]
+    (if (<= k 0)
+      res
+      (recur (* res n) n (dec k)))))
 
 (defn one-or-less? [coll]
   (or (empty? coll) (empty? (rest coll))))
